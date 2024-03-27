@@ -11,7 +11,7 @@ const mongoURL = process.env.MONGO_URL;
 
 mongoose.connect(mongoURL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true, // Mantener esto para compatibilidad actual
 });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error de conexión a MongoDB:'));
