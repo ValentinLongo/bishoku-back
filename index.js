@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors'); // Importa el paquete cors
 const productoRoutes = require('./src/routes/routes');
 
 dotenv.config();
@@ -10,8 +11,6 @@ const PORT = process.env.PORT || 3000;
 const mongoURL = process.env.MONGO_URL;
 
 mongoose.connect(mongoURL, {
-  // Remueve useNewUrlParser y useUnifiedTopology, ya que son obsoletas
-  // Mantén useUnifiedTopology para compatibilidad, aunque no es necesario
   useUnifiedTopology: true,
 });
 const db = mongoose.connection;
@@ -21,6 +20,7 @@ db.once('open', () => {
 });
 
 app.use(express.json());
+app.use(cors()); // Usa el middleware cors para permitir solicitudes desde otros dominios
 app.use('/api', productoRoutes);
 
 app.listen(PORT, () => {
