@@ -9,21 +9,30 @@ const PedidoSchema = mongoose.Schema({
     type: String,
     required: false
   },
-  ubicaciones: {
+  ubicacion: {
     type: [String],
     required: false
   },
   productosSeleccionados: {
-    type: [{
-      _id: mongoose.Schema.Types.ObjectId,
-      descripcion: String,
-      precio: Number
-    }],
+    type: [
+      {
+        _id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Producto'
+        },
+        descripcion: String,
+        precio: Number
+      }
+    ],
     required: false
   },
   precioTotal: {
     type: Number,
     required: false
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now
   }
 });
 

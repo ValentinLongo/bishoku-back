@@ -2,8 +2,9 @@ const Pedido = require("../models/pedido");
 
 exports.crearPedido = async (req, res) => {
   try {
-    const { nombre, direccion, ubicaciones, productosSeleccionados, precioTotal } = req.body;
-    const nuevoPedido = new Pedido({ nombre, direccion, ubicaciones, productosSeleccionados, precioTotal });
+    const { nombre, direccion, ubicacion, productosSeleccionados, precioTotal } = req.body;
+    console.log(req.body);
+    const nuevoPedido = new Pedido({ nombre, direccion, ubicacion, productosSeleccionados, precioTotal });
     await nuevoPedido.save();
     res.status(201).json(nuevoPedido);
   } catch (error) {
@@ -23,10 +24,10 @@ exports.obtenerPedidos = async (req, res) => {
 exports.actualizarPedido = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, direccion, ubicaciones, productosSeleccionados, precioTotal } = req.body;
+    const { nombre, direccion, ubicacion, productosSeleccionados, precioTotal } = req.body;
     const pedidoActualizado = await Pedido.findByIdAndUpdate(
       id,
-      { nombre, direccion, ubicaciones, productosSeleccionados, precioTotal },
+      { nombre, direccion, ubicacion, productosSeleccionados, precioTotal },
       { new: true }
     );
     if (!pedidoActualizado) {
