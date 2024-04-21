@@ -2,8 +2,8 @@ const Producto = require("../models/producto");
 
 exports.crearProducto = async (req, res) => {
   try {
-    const { descripcion, precio } = req.body;
-    const nuevoProducto = new Producto({ descripcion, precio });
+    const { descripcion, precio, categoria } = req.body;
+    const nuevoProducto = new Producto({ descripcion, categoria, precio });
     await nuevoProducto.save();
     res.status(201).json(nuevoProducto);
   } catch (error) {
@@ -23,10 +23,10 @@ exports.obtenerProductos = async (req, res) => {
 exports.actualizarProducto = async (req, res) => {
   try {
     const { id } = req.params;
-    const { descripcion, precio } = req.body;
+    const { descripcion, precio, categoria } = req.body;
     const productoActualizado = await Producto.findByIdAndUpdate(
       id,
-      { descripcion, precio },
+      { descripcion, precio, categoria },
       { new: true }
     );
     if (!productoActualizado) {

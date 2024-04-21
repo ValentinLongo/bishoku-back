@@ -1,5 +1,21 @@
 const mongoose = require('mongoose');
 
+const SubProductoSchema = mongoose.Schema({
+  producto: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Producto'
+  },
+  descripcion: {
+    type: String
+  },
+  precio: {
+    type: Number
+  },
+  categoria: {
+    type: String
+  }
+});
+
 const PedidoSchema = mongoose.Schema({
   nombre: {
     type: String,
@@ -16,12 +32,13 @@ const PedidoSchema = mongoose.Schema({
   productosSeleccionados: {
     type: [
       {
-        _id: {
+        producto: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Producto'
         },
         descripcion: String,
-        precio: Number
+        precio: Number,
+        subproductos: [SubProductoSchema] 
       }
     ],
     required: false
