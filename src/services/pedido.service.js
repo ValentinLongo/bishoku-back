@@ -3,7 +3,6 @@ const Pedido = require("../models/pedido");
 exports.crearPedido = async (req, res) => {
   try {
     const { nombre, direccion, ubicacion, productosSeleccionados, precioTotal } = req.body;
-    console.log(req.body);
     const nuevoPedido = new Pedido({ nombre, direccion, ubicacion, productosSeleccionados, precioTotal });
     await nuevoPedido.save();
     res.status(201).json(nuevoPedido);
